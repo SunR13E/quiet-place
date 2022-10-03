@@ -20,4 +20,6 @@ object Versions {
     const val COMPOSE_MATERIAL = "1.0.0-beta03"
     const val COMPOSE_LIFECYCLE = "1.0.0-alpha07"
     const val ANDROID_LIB = "7.3.0"
+    const val DETEKT = "1.22.0-RC1"
+    const val JUNIT = "4.13.2"
 }

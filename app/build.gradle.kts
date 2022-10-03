@@ -4,7 +4,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
-
+    id(Dependencies.DETEKT)
 }
 
 android {
@@ -79,6 +79,7 @@ dependencies {
 
     // Dagger
     implementation(Dependencies.DAGGER)
+    testImplementation("org.junit.jupiter:junit-jupiter")
     kapt(Dependencies.DAGGER_COMPILER)
 
     // Misc
@@ -96,4 +97,8 @@ dependencies {
     implementation(Dependencies.COMPOSE_ANIMATION)
     implementation(Dependencies.COMPOSE_LIFECYCLE_VIEWMODEL)
     implementation(Dependencies.SHIMMER_JETPACK_COMPOSE)
+
+    //Tests
+    implementation(Dependencies.JUNIT)
+    detektPlugins(Dependencies.DETEKT_FORMATTING)
 }

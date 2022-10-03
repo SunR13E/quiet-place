@@ -18,4 +18,10 @@ plugins {
     id("com.android.application") version Versions.ANDROID_LIB apply false
     id("com.android.library") version Versions.ANDROID_LIB apply false
     id("org.jetbrains.kotlin.android") version Versions.KOTLIN apply false
+    id(Dependencies.DETEKT) version Versions.DETEKT
+}
+
+dependencies {
+    // Build script dependencies
+    detektPlugins(Dependencies.DETEKT_FORMATTING)
 }

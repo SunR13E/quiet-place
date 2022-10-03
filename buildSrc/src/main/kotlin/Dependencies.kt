@@ -55,6 +55,13 @@ object Dependencies {
         "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.COMPOSE_LIFECYCLE}"
     const val COMPOSE_WINDOW_SIZE =
         "androidx.compose.material3:material3:${Versions.COMPOSE_MATERIAL}"
+
+    //Detekt
+    const val DETEKT = "io.gitlab.arturbosch.detekt"
+    const val DETEKT_FORMATTING = "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.DETEKT}"
+
+    //Tests
+    const val JUNIT = "junit:junit:${Versions.JUNIT}"
 }
 
 private fun kotlinLib(module: String, version: String? = null): String {
