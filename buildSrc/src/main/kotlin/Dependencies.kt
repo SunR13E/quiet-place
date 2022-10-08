@@ -7,7 +7,7 @@ object BuildPlugins {
 
 object Dependencies {
     //Android
-    val KOTLIN_STD_LIB = kotlinLib("stdlib-jdk7", Versions.KOTLIN)
+    const val KOTLIN_STD_LIB = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}"
     const val APPCOMPAT = "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
     const val ANDROID_CORE_KTX = "androidx.core:core-ktx:${Versions.ANDROID_CORE_KTX}"
     const val LIFECYCLE_VIEWMODEL_KTX =
@@ -15,9 +15,19 @@ object Dependencies {
     const val LIFECYCLE_RUNTIME_KTX =
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LIFECYCLE_KTX}"
 
+    //Net
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
+    const val OKHTTP_BOM = "com.squareup.okhttp3:okhttp-bom:${Versions.OKHTTP}"
+    const val OKHTTP = "com.squareup.okhttp3:okhttp"
+    const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor"
+
     //DI
     const val DAGGER = "com.google.dagger:dagger:${Versions.DAGGER}"
     const val DAGGER_COMPILER = "com.google.dagger:dagger-compiler:${Versions.DAGGER}"
+    const val DAGGER_ANDROID =  "com.google.dagger:dagger-android:${Versions.DAGGER}"
+    const val DAGGER_ANDROID_SUPPORT =  "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
+    const val DAGGER_PROCESSOR =  "com.google.dagger:dagger-android-processor:${Versions.DAGGER}"
 
     // Coroutines
     const val COROUTINES_CORE =
@@ -63,8 +73,3 @@ object Dependencies {
     //Tests
     const val JUNIT = "junit:junit:${Versions.JUNIT}"
 }
-
-private fun kotlinLib(module: String, version: String? = null): String {
-    return "org.jetbrains.kotlin:kotlin-$module${version?.let { ":$version" } ?: ""}"
-}
-

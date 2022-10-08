@@ -1,4 +1,3 @@
-@file:Suppress("MagicNumber")
 package com.example.quietplace.ui.theme
 
 import androidx.compose.ui.graphics.Color

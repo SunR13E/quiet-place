@@ -4,13 +4,14 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
     id(Dependencies.DETEKT)
 }
 
 android {
     namespace = "com.example.quietplace"
-    compileSdkVersion(ConfigData.compileSdkVersion)
-    buildToolsVersion(ConfigData.buildToolsVersion)
+    compileSdk = ConfigData.compileSdkVersion
+    buildToolsVersion = ConfigData.buildToolsVersion
 
     defaultConfig {
         applicationId = "com.example.quietplace"
@@ -34,6 +35,15 @@ android {
             )
         }
     }
+    packagingOptions {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/*.kotlin_module",
+                "META-INF/AL2.0",
+                "META-INF/LGPL2.1"
+            )
+        )
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -48,20 +58,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
     }
-    packagingOptions {
-        resources.excludes.addAll(
-            listOf(
-                "META-INF/*.kotlin_module",
-                "META-INF/AL2.0",
-                "META-INF/LGPL2.1"
-            )
-        )
-    }
 }
 
 dependencies {
     // Kotlin
     implementation(Dependencies.KOTLIN_STD_LIB)
+
+    //Net
+    implementation(Dependencies.RETROFIT)
+    implementation(Dependencies.CONVERTER_GSON)
+    implementation(platform(Dependencies.OKHTTP_BOM))
+    implementation(Dependencies.OKHTTP)
+    implementation(Dependencies.LOGGING_INTERCEPTOR)
 
     // Coroutines
     implementation(Dependencies.COROUTINES)
@@ -79,8 +87,11 @@ dependencies {
 
     // Dagger
     implementation(Dependencies.DAGGER)
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation(Dependencies.DAGGER_COMPILER)
+    implementation(Dependencies.DAGGER_ANDROID)
+    implementation(Dependencies.DAGGER_ANDROID_SUPPORT)
     kapt(Dependencies.DAGGER_COMPILER)
+    kapt(Dependencies.DAGGER_PROCESSOR)
 
     // Misc
     implementation(Dependencies.FRAGMENT_KTX)
