@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.quietplace
+package com.example.quietplace.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
