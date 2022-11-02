@@ -1,46 +1,48 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.example.quietplace.ui
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.quietplace.ui.theme.QuietPlaceTheme
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import com.example.quietplace.QuietPlaceApp
+import com.example.quietplace.R
+import com.example.quietplace.ui.extension.navigateSafe
+import com.example.quietplace.ui.factory.ViewModelFactory
+import javax.inject.Inject
+import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel: MainActivityViewModel by viewModels { viewModelFactory }
+
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            QuietPlaceTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+        (application as QuietPlaceApp).di.inject(this)
+        setContentView(R.layout.layout_main_activity)
+        navController = findNavController(R.id.nav_host_fragment)
+        observeNavigation()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
+
+    override fun onSupportNavigateUp() = navController.navigateUp()
+
+    private fun observeNavigation() {
+        lifecycleScope.launch {
+            viewModel.navDirections.collect {
+                val directions = it.consume()
+                navController.navigateSafe(directions)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    QuietPlaceTheme {
-        Greeting("Android")
     }
 }
