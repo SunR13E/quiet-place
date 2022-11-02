@@ -5,7 +5,7 @@ import com.example.quietplace.api.CatApi
 import com.example.quietplace.api.DogApi
 import com.example.quietplace.di.modules.AppModule
 import com.example.quietplace.di.modules.NetworkModule
-import com.example.quietplace.di.modules.ViewModelsModule
+import com.example.quietplace.di.modules.ViewModelModule
 import com.example.quietplace.ui.MainActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -15,7 +15,7 @@ import javax.inject.Singleton
     modules = [
         AppModule::class,
         NetworkModule::class,
-        ViewModelsModule::class
+        ViewModelModule::class
     ]
 )
 interface AppComponent {
